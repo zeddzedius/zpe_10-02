@@ -1,1 +1,56 @@
-k
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Генератор логотипов</title>
+  <link
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    rel="stylesheet">
+  <style>
+    body { background: #f8f9fa; }
+    .btn-primary { background: #28a745; border-color: #28a745; }
+  </style>
+</head>
+<body>
+  <div class="container py-4">
+    <h1 class="text-center mb-4">Генератор логотипов</h1>
+    <form method="post" onsubmit="showLoader()">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label>Форма</label>
+          <input name="forma" class="form-control" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Стиль</label>
+          <input name="style" class="form-control" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Описание</label>
+          <input name="description" class="form-control" required>
+        </div>
+      </div>
+      <button class="btn btn-primary">Сгенерировать логотип</button>
+    </form>
+
+    <div id="loading" class="text-center my-4" style="display:none;">
+      <div class="spinner-border text-success" role="status"></div>
+      <p>Генерируем изображение...</p>
+    </div>
+
+    {% if image %}
+      <div class="text-center my-4">
+        <h4>Готовый логотип:</h4>
+        <img src="{{ image }}" class="img-fluid" style="max-width:300px;">
+      </div>
+    {% elif error %}
+      <div class="alert alert-danger my-4">{{ error }}</div>
+    {% endif %}
+  </div>
+
+  <script>
+    function showLoader(){
+      document.getElementById("loading").style.display = "block";
+    }
+  </script>
+</body>
+</html>
